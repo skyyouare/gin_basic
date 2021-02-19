@@ -1,12 +1,14 @@
 package routes
 
 import (
-	"github.com/gin-gonic/gin"
 	"gin_basic/controller"
+	"gin_basic/middleware"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
-// getRoutes will create our routes of our entire application
+// GetRoutes will create our routes of our entire application
 // this way every group of routes can be defined in their own file
 // so this one won't be so messy
 func GetRoutes(router *gin.Engine) {
@@ -16,7 +18,7 @@ func GetRoutes(router *gin.Engine) {
 	v1 := router.Group("/v1")
 
 	v1.Use(
-	//middleware.RecoveryMiddleware(),
+		middleware.RecoveryMiddleware(),
 	)
 	{
 		controller.ReportRegister(v1)
