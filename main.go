@@ -1,7 +1,6 @@
 package main
 
 import (
-	"gin_basic/pkg/db"
 	"gin_basic/pkg/server"
 	"gin_basic/pkg/setting"
 	"log"
@@ -38,7 +37,7 @@ func init() {
 		log.Fatalln("启动模式错误:dev/test/prod")
 	}
 	//初始化db
-	db.Setup()
+	// db.Setup()
 }
 
 func main() {
