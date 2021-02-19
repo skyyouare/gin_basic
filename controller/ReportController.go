@@ -3,14 +3,16 @@ package controller
 import (
 	"errors"
 	"fmt"
-	"github.com/360EntSecGroup-Skylar/excelize/v2"
-	"github.com/gin-gonic/gin"
 	"gin_basic/middleware"
 	"gin_basic/pkg/tools"
 	"net/http"
 	"strconv"
+
+	"github.com/360EntSecGroup-Skylar/excelize/v2"
+	"github.com/gin-gonic/gin"
 )
 
+//ReqBody 请求参数
 type ReqBody struct {
 	Offset   []int        `json:"offset"`
 	Title    []string     `json:"title"`
@@ -19,9 +21,11 @@ type ReqBody struct {
 	Muban    string       `json:"muban"`
 }
 
+//ReportController 控制器
 type ReportController struct {
 }
 
+//ReportRegister 路由注册
 func ReportRegister(router *gin.RouterGroup) {
 	controller := new(ReportController)
 	router.POST("/report/index", controller.index)
