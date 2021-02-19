@@ -1,0 +1,21 @@
+version: '2'
+services:
+
+  #server container
+  gin_basic:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    #use docker images
+    image: skyyoure/gin_basic_prod:latest
+    container_name: gin_basic
+    #ports setting
+    ports:
+      - 9090:9090
+    restart: always
+    networks:
+      - gin_basic
+networks:
+  gin_basic:
+    external:
+      name: rundeck_mysql_default
