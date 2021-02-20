@@ -35,7 +35,6 @@ func ReportRegister(router *gin.RouterGroup) {
 
 //测试
 func (t *ReportController) test(c *gin.Context) {
-	panic(123)
 	c.String(http.StatusOK, "Welcome Gin Server14")
 }
 
