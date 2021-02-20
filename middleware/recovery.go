@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"gin_basic/pkg/logger"
 	"gin_basic/pkg/setting"
+	"net/http/httputil"
 	"runtime/debug"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,7 +17,8 @@ func RecoveryMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
-				logger.Errorf(string(debug.Stack()))
+				httpRequest, _ := httputil.DumpRequest(c.Request, false)
+				logger.Errorw("RecoveryMiddleware", "time", time.Now(), "error", err, "request", string(httpRequest), "stack", string(debug.Stack()))
 				//接口返回
 				if setting.AppSetting.DebugMode != "debug" {
 					ResponseError(c, 1004, errors.New("内部错误"))

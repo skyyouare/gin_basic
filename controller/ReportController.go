@@ -29,6 +29,14 @@ type ReportController struct {
 func ReportRegister(router *gin.RouterGroup) {
 	controller := new(ReportController)
 	router.POST("/report/index", controller.index)
+	router.GET("/report/test", controller.test)
+
+}
+
+//测试
+func (t *ReportController) test(c *gin.Context) {
+	panic(123)
+	c.String(http.StatusOK, "Welcome Gin Server14")
 }
 
 //商机基础报表
