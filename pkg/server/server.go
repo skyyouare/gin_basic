@@ -26,7 +26,7 @@ func HTTPServRun() {
 	// Initializing the server in a goroutine so that
 	// it won't block the graceful shutdown handling below
 	go func() {
-		logger.Infof("HttpServerRun:%s", setting.AppSetting.DebugMode)
+		logger.Errorf("HttpServerRun:%s", setting.AppSetting.DebugMode)
 		if err := serv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			logger.Fatalf("HttpServerRun:%s err:%v", setting.ServerSetting.HTTPPort, err)
 		}
@@ -43,5 +43,5 @@ func HTTPServStop() {
 		logger.Fatalf("HttpServerStop err:%v", err)
 	}
 
-	logger.Infof("HttpServerStop stopped")
+	logger.Errorf("HttpServerStop stopped")
 }

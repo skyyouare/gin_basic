@@ -57,7 +57,7 @@ func main() {
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	//signal.Notify(quit, syscall.SIGKILL, syscall.SIGQUIT, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	logger.Infof("Shutting down server...")
+	logger.Errorf("Shutting down server...")
 	//httpserver stop
 	server.HTTPServStop()
 }

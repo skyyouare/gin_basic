@@ -50,3 +50,7 @@
 {"level":"info","ts":"2021-02-20T11:40:23.544+0800","caller":"server/server.go:29","msg":"HttpServerRun:debug"}
 {"level":"info","ts":"2021-02-20T11:40:29.543+0800","caller":"gin_basic/main.go:60","msg":"Shutting down server..."}
 {"level":"info","ts":"2021-02-20T11:40:29.543+0800","caller":"server/server.go:46","msg":"HttpServerStop stopped"}
+{"level":"info","ts":"2021-02-20T11:42:51.955+0800","caller":"gin_basic/main.go:43","msg":"传递模式为dev，加载开发模式配置"}
+{"level":"error","ts":"2021-02-20T11:42:51.956+0800","caller":"server/server.go:29","msg":"HttpServerRun:debug"}
+{"level":"error","ts":"2021-02-20T11:42:52.897+0800","caller":"gin_basic/main.go:60","msg":"Shutting down server..."}
+{"level":"error","ts":"2021-02-20T11:42:52.897+0800","caller":"server/server.go:46","msg":"HttpServerStop stopped"}
