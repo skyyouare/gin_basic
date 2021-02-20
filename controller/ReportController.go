@@ -35,6 +35,7 @@ func ReportRegister(router *gin.RouterGroup) {
 
 //测试
 func (t *ReportController) test(c *gin.Context) {
+	// middleware.ResponseError(c, middleware.ErrorCode, errors.New("测试"))
 	middleware.ResponseSuccess(c, "test")
 }
 

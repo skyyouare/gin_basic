@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"fmt"
+	"encoding/json"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -29,13 +29,17 @@ type errorResponse struct {
 
 //ResponseError 成功状态返回方法
 func ResponseError(c *gin.Context, code ResponseCode, err error) {
-	fmt.Print(err)
 	resp := &errorResponse{Code: code, Msg: err.Error()}
 	c.JSON(http.StatusOK, resp)
+	response, _ := json.Marshal(resp)
+	c.Set("response", string(response))
+	c.AbortWithError(200, err)
 }
 
 //ResponseSuccess 失败状态返回方法
 func ResponseSuccess(c *gin.Context, data interface{}) {
 	resp := &successResponse{Code: SuccessCode, Data: data}
 	c.JSON(http.StatusOK, resp)
+	response, _ := json.Marshal(resp)
+	c.Set("response", string(response))
 }

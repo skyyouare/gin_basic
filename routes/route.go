@@ -19,6 +19,7 @@ func GetRoutes(router *gin.Engine) {
 
 	v1.Use(
 		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
 	)
 	{
 		controller.ReportRegister(v1)
