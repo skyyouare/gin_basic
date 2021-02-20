@@ -42,7 +42,7 @@ func init() {
 
 func main() {
 	//httpserver run
-	server.HttpServRun()
+	server.HTTPServRun()
 	// Wait for interrupt signal to gracefully shutdown the server with
 	// a timeout of 5 seconds.
 	quit := make(chan os.Signal)
@@ -54,5 +54,5 @@ func main() {
 	<-quit
 	log.Println("Shutting down server...")
 	//httpserver stop
-	server.HttpServStop()
+	server.HTTPServStop()
 }

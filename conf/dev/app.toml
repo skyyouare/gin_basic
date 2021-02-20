@@ -3,13 +3,16 @@
     DebugMode="debug"
     TimeLocation="Asia/Chongqing"
 
-[server]
-    HttpPort = ":9090"
+[Server]
+    HTTPPort = ":9090"
+
+[Log]
+    FileName = "zap.log"
 
 [Mysql]
     UserName = ""
     PassWord = ""
-    IpHost = ""
+    IPHost = ""
     Port = "3306"
     DbName = ""
     MaxIdleConns = 25 #设置空闲链接
@@ -17,4 +20,4 @@
     ConnMaxLifetime = 60 #可重用链接得最大时间长度，单位分钟
 
 [Redis]
-    IpHost = "127.0.0.1:6379"
+    IPHost = "127.0.0.1:6379"

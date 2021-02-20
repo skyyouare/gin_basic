@@ -1,43 +1,56 @@
 package setting
 
 import (
-	"github.com/BurntSushi/toml"
 	"log"
 	"time"
+
+	"github.com/BurntSushi/toml"
 )
 
 var (
-	cfg           = &Config{}
-	AppSetting    = &App{}
+	cfg = &Config{}
+	//AppSetting app配置
+	AppSetting = &App{}
+	//ServerSetting server配置
 	ServerSetting = &Server{}
-	MysqlSetting  = &Mysql{}
-	RedisSetting  = &Redis{}
+	//LogSetting log配置
+	LogSetting = &Log{}
+	//MysqlSetting mysql配置
+	MysqlSetting = &Mysql{}
+	//RedisSetting redis配置
+	RedisSetting = &Redis{}
 )
 
-//conf
+// Config 配置
 type Config struct {
 	App    *App
 	Server *Server
+	Log    *Log
 	Mysql  *Mysql
 	Redis  *Redis
 }
 
-//app
+// App app相关配置
 type App struct {
 	DebugMode    string
 	TimeLocation string
 }
 
-//server
+// Server server相关配置
 type Server struct {
-	HttpPort string
+	HTTPPort string
 }
 
-//mysql
+// Log log相关配置
+type Log struct {
+	FileName string
+}
+
+// Mysql mysql相关配置
 type Mysql struct {
 	UserName        string
 	PassWord        string
-	IpHost          string
+	IPHost          string
 	Port            string
 	DbName          string
 	MaxIdleConns    int
@@ -45,18 +58,19 @@ type Mysql struct {
 	ConnMaxLifetime time.Duration
 }
 
-//redis
+// Redis redis相关配置
 type Redis struct {
-	IpHost string
+	IPHost string
 }
 
-//setup conf
+//Setup 设置配置
 func Setup(confPath string) {
 	if _, err := toml.DecodeFile(confPath, &cfg); err != nil {
 		log.Fatal(err)
 	}
 	AppSetting = cfg.App
 	ServerSetting = cfg.Server
+	LogSetting = cfg.Log
 	MysqlSetting = cfg.Mysql
 	RedisSetting = cfg.Redis
 	return
