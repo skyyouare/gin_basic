@@ -64,6 +64,11 @@ func Infof(template string, args ...interface{}) {
 	errorLogger.Infof(template, args...)
 }
 
+// Infow logs a message with some additional context. The variadic key-value pairs are treated as they are in With.
+func Infow(msg string, keysAndValues ...interface{}) {
+	errorLogger.Infow(msg, keysAndValues...)
+}
+
 // Warn uses fmt.Sprint to construct and log a message.
 func Warn(args ...interface{}) {
 	errorLogger.Warn(args...)
@@ -82,6 +87,11 @@ func Error(args ...interface{}) {
 // Errorf uses fmt.Sprintf to log a templated message.
 func Errorf(template string, args ...interface{}) {
 	errorLogger.Errorf(template, args...)
+}
+
+// Errorw logs a message with some additional context. The variadic key-value pairs are treated as they are in With.
+func Errorw(msg string, keysAndValues ...interface{}) {
+	errorLogger.Errorw(msg, keysAndValues...)
 }
 
 // DPanic uses fmt.Sprint to construct and log a message. In development, the logger then panics. (See DPanicLevel for details.)

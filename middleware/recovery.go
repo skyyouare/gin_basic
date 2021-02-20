@@ -3,6 +3,7 @@ package middleware
 import (
 	"errors"
 	"fmt"
+	"gin_basic/pkg/logger"
 	"gin_basic/pkg/setting"
 	"runtime/debug"
 
@@ -14,7 +15,7 @@ func RecoveryMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
-				fmt.Println(string(debug.Stack()))
+				logger.Errorf(string(debug.Stack()))
 				//接口返回
 				if setting.AppSetting.DebugMode != "debug" {
 					ResponseError(c, 1004, errors.New("内部错误"))
