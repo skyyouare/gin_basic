@@ -7,7 +7,7 @@
     HTTPPort = ":9090"
 
 [Log]
-    FileName = "zap.log"
+    FileName = "log/zap.log"
     MaxSize = 100
     LocalTime = true
     Compress = true
