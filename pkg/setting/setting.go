@@ -43,7 +43,10 @@ type Server struct {
 
 // Log log相关配置
 type Log struct {
-	FileName string
+	FileName  string
+	MaxSize   int
+	LocalTime bool
+	Compress  bool
 }
 
 // Mysql mysql相关配置

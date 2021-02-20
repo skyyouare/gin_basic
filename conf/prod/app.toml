@@ -8,6 +8,10 @@
 
 [Log]
     FileName = "zap.log"
+    MaxSize = 100
+    LocalTime = true
+    Compress = true
+
 
 [Mysql]
     UserName = ""

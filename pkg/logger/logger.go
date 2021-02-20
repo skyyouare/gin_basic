@@ -29,13 +29,12 @@ func getLoggerLevel(lvl string) zapcore.Level {
 }
 
 func init() {
-	fileName := setting.LogSetting.FileName
 	level := getLoggerLevel("debug")
 	syncWriter := zapcore.AddSync(&lumberjack.Logger{
-		Filename:  fileName,
-		MaxSize:   1 << 30, //1G
-		LocalTime: true,
-		Compress:  true,
+		Filename:  setting.LogSetting.FileName,
+		MaxSize:   setting.LogSetting.MaxSize,
+		LocalTime: setting.LogSetting.LocalTime,
+		Compress:  setting.LogSetting.Compress,
 	})
 	encoder := zap.NewProductionEncoderConfig()
 	encoder.EncodeTime = zapcore.ISO8601TimeEncoder
