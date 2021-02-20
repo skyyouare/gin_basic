@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gin_basic/pkg/logger"
 	"gin_basic/pkg/server"
 	"gin_basic/pkg/setting"
 	"log"
@@ -17,25 +18,29 @@ func init() {
 		}
 	}
 	if serverMode == "" { // 不为空则表示os.Arg[1]存在
-		log.Fatalln("请增加启动模式")
+		log.Fatalf("请增加启动模式")
 	}
-	//根据参数选择配置文件
+	//初始化配置文件
+	var setupType string
 	switch serverMode {
 	case "dev":
 		// 加载调试模式配置
-		log.Printf(" [INFO] 传递模式为%s，加载开发模式配置\n", serverMode)
+		setupType = "开发模式"
 		setting.Setup("./conf/dev/app.toml")
 	case "prod":
 		// 加载正式环境配置
-		log.Printf(" [INFO] 传递模式为%s，加载正式环境配置\n", serverMode)
+		setupType = "正式环境"
 		setting.Setup("./conf/prod/app.toml")
 	case "test":
 		// 加载测试环境配置
-		log.Printf(" [INFO] 传递模式为%s，加载测试环境配置\n", serverMode)
+		setupType = "测试环境"
 		setting.Setup("./conf/test/app.toml")
 	default:
-		log.Fatalln("启动模式错误:dev/test/prod")
+		log.Println(" 启动模式错误:dev/test/prod", serverMode)
 	}
+	//初始化日志
+	logger.Setup()
+	logger.Infof("传递模式为%s，加载%s配置", serverMode, setupType)
 	//初始化db
 	// db.Setup()
 }
@@ -52,7 +57,7 @@ func main() {
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	//signal.Notify(quit, syscall.SIGKILL, syscall.SIGQUIT, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	log.Println("Shutting down server...")
+	logger.Infof("Shutting down server...")
 	//httpserver stop
 	server.HTTPServStop()
 }

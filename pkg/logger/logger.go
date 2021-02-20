@@ -28,7 +28,8 @@ func getLoggerLevel(lvl string) zapcore.Level {
 	return zapcore.InfoLevel
 }
 
-func init() {
+//Setup 初始化
+func Setup() {
 	level := getLoggerLevel("debug")
 	syncWriter := zapcore.AddSync(&lumberjack.Logger{
 		Filename:  setting.LogSetting.FileName,

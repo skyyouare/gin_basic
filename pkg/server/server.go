@@ -2,9 +2,9 @@ package server
 
 import (
 	"context"
+	"gin_basic/pkg/logger"
 	"gin_basic/pkg/router"
 	"gin_basic/pkg/setting"
-	"log"
 	"net/http"
 	"time"
 
@@ -26,9 +26,9 @@ func HTTPServRun() {
 	// Initializing the server in a goroutine so that
 	// it won't block the graceful shutdown handling below
 	go func() {
-		log.Printf(" [INFO] HttpServerRun:%s\n", setting.AppSetting.DebugMode)
+		logger.Infof("HttpServerRun:%s", setting.AppSetting.DebugMode)
 		if err := serv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf(" [ERROR] HttpServerRun:%s err:%v\n", setting.ServerSetting.HTTPPort, err)
+			logger.Fatalf("HttpServerRun:%s err:%v", setting.ServerSetting.HTTPPort, err)
 		}
 	}()
 }
@@ -40,8 +40,8 @@ func HTTPServStop() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := serv.Shutdown(ctx); err != nil {
-		log.Fatalf(" [ERROR] HttpServerStop err:%v\n", err)
+		logger.Fatalf("HttpServerStop err:%v", err)
 	}
 
-	log.Printf(" [INFO] HttpServerStop stopped\n")
+	logger.Infof("HttpServerStop stopped")
 }
