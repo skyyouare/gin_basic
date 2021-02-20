@@ -35,7 +35,7 @@ func ReportRegister(router *gin.RouterGroup) {
 
 //测试
 func (t *ReportController) test(c *gin.Context) {
-	c.String(http.StatusOK, "Welcome Gin Server14")
+	middleware.ResponseSuccess(c, "test")
 }
 
 //商机基础报表
