@@ -2,6 +2,7 @@ package logger
 
 import (
 	"gin_basic/pkg/setting"
+	"time"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -38,7 +39,10 @@ func Setup() {
 		Compress:  setting.LogSetting.Compress,
 	})
 	encoder := zap.NewProductionEncoderConfig()
-	encoder.EncodeTime = zapcore.ISO8601TimeEncoder
+	encoder.EncodeTime = func(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
+		var cstSh, _ = time.LoadLocation("Asia/Shanghai") //上海
+		enc.AppendString(t.In(cstSh).Format("2006-01-02 15:04:05"))
+	}
 	core := zapcore.NewCore(zapcore.NewJSONEncoder(encoder), syncWriter, zap.NewAtomicLevelAt(level))
 	logger := zap.New(core, zap.AddCaller(), zap.AddCallerSkip(1))
 	errorLogger = logger.Sugar()
