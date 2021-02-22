@@ -20,7 +20,7 @@ func init() {
 	if serverMode == "" { // 不为空则表示os.Arg[1]存在
 		log.Fatalf("请增加启动模式")
 	}
-	//初始化配置文件
+	// 初始化配置文件
 	var setupType string
 	switch serverMode {
 	case "dev":
@@ -38,15 +38,15 @@ func init() {
 	default:
 		log.Println(" 启动模式错误:dev/test/prod", serverMode)
 	}
-	//初始化日志
+	// 初始化日志
 	logger.Setup()
 	logger.Infof("传递模式为%s，加载%s配置", serverMode, setupType)
-	//初始化db
+	// 初始化db
 	// db.Setup()
 }
 
 func main() {
-	//httpserver run
+	// httpserver run
 	server.HTTPServRun()
 	// Wait for interrupt signal to gracefully shutdown the server with
 	// a timeout of 5 seconds.
@@ -55,9 +55,9 @@ func main() {
 	// kill -2 is syscall.SIGINT
 	// kill -9 is syscall.SIGKILL but can't be catch, so don't need add it
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-	//signal.Notify(quit, syscall.SIGKILL, syscall.SIGQUIT, syscall.SIGINT, syscall.SIGTERM)
+	// signal.Notify(quit, syscall.SIGKILL, syscall.SIGQUIT, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
 	logger.Errorf("Shutting down server...")
-	//httpserver stop
+	// httpserver stop
 	server.HTTPServStop()
 }

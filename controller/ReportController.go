@@ -12,7 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//ReqBody 请求参数
+// ReqBody 请求参数
 type ReqBody struct {
 	Offset   []int        `json:"offset"`
 	Title    []string     `json:"title"`
@@ -21,11 +21,11 @@ type ReqBody struct {
 	Muban    string       `json:"muban"`
 }
 
-//ReportController 控制器
+// ReportController 控制器
 type ReportController struct {
 }
 
-//ReportRegister 路由注册
+// ReportRegister 路由注册
 func ReportRegister(router *gin.RouterGroup) {
 	controller := new(ReportController)
 	router.POST("/report/index", controller.index)
@@ -33,13 +33,13 @@ func ReportRegister(router *gin.RouterGroup) {
 
 }
 
-//测试
+// 测试
 func (t *ReportController) test(c *gin.Context) {
 	// middleware.ResponseError(c, middleware.ErrorCode, errors.New("测试"))
 	middleware.ResponseSuccess(c, "test")
 }
 
-//商机基础报表
+// 商机基础报表
 func (t *ReportController) index(c *gin.Context) {
 	var reqInfo ReqBody
 	err := c.BindJSON(&reqInfo)
@@ -68,7 +68,7 @@ func (t *ReportController) index(c *gin.Context) {
 		middleware.ResponseError(c, middleware.ErrorCode, errors.New("file不能为空"))
 		return
 	}
-	//判断是否有模板参数，生成 *excelize.File
+	// 判断是否有模板参数，生成 *excelize.File
 	var f *excelize.File
 	if muban != "" {
 		res, err := http.Get(muban)
@@ -76,7 +76,7 @@ func (t *ReportController) index(c *gin.Context) {
 			middleware.ResponseError(c, middleware.ErrorCode, err)
 			return
 		}
-		//读取excel
+		// 读取excel
 		f, err = excelize.OpenReader(res.Body, excelize.Options{})
 		if err != nil {
 			middleware.ResponseError(c, middleware.ErrorCode, err)
@@ -85,7 +85,7 @@ func (t *ReportController) index(c *gin.Context) {
 	} else {
 		f = excelize.NewFile()
 	}
-	//设置新增sheet，title
+	// 设置新增sheet，title
 	for k, title := range titles {
 		if k == 0 {
 			f.SetSheetName(f.GetSheetName(0), title)
@@ -93,9 +93,9 @@ func (t *ReportController) index(c *gin.Context) {
 			f.NewSheet(title)
 		}
 	}
-	//遍历写入
+	// 遍历写入
 	for index, list := range lists {
-		//设置当前sheet
+		// 设置当前sheet
 		f.SetActiveSheet(index)
 		for lineNum, v := range list {
 			// Set value of a cell.
@@ -103,7 +103,7 @@ func (t *ReportController) index(c *gin.Context) {
 			for _, vv := range v {
 				colNum++
 				sheetPosition := tools.Num2str(colNum) + strconv.Itoa(lineNum+offset[index])
-				//格式转换
+				// 格式转换
 				fvv, err := strconv.ParseFloat(vv, 64)
 				if err == nil {
 					err = f.SetCellValue(titles[index], sheetPosition, fvv)
@@ -118,7 +118,7 @@ func (t *ReportController) index(c *gin.Context) {
 		}
 	}
 	fmt.Println(file)
-	//输出二进制流
+	// 输出二进制流
 	c.Header("response-type", "blob")
 	data, _ := f.WriteToBuffer()
 	c.Data(http.StatusOK, "application/vnd.ms-excel", data.Bytes())

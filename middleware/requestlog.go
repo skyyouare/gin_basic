@@ -16,7 +16,7 @@ func RequestInLog(c *gin.Context) {
 	bodyBytes, _ := ioutil.ReadAll(c.Request.Body)
 	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes)) // Write body back
 
-	//日志
+	// 日志
 	logger.Infow("gin-request-in", "uri", c.Request.RequestURI, "method", c.Request.Method, "args", c.Request.PostForm, "body", string(bodyBytes), "ip", c.ClientIP())
 }
 
@@ -28,7 +28,7 @@ func RequestOutLog(c *gin.Context) {
 
 	startExecTime, _ := st.(time.Time)
 
-	//日志
+	// 日志
 	logger.Infow("gin-request-out", "uri", c.Request.RequestURI, "method", c.Request.Method, "args", c.Request.PostForm, "ip", c.ClientIP(), "response", response, "proc_time", endExecTime.Sub(startExecTime).Seconds())
 }
 

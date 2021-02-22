@@ -9,15 +9,15 @@ import (
 
 var (
 	cfg = &Config{}
-	//AppSetting app配置
+	// AppSetting app配置
 	AppSetting = &App{}
-	//ServerSetting server配置
+	// ServerSetting server配置
 	ServerSetting = &Server{}
-	//LogSetting log配置
+	// LogSetting log配置
 	LogSetting = &Log{}
-	//MysqlSetting mysql配置
+	// MysqlSetting mysql配置
 	MysqlSetting = &Mysql{}
-	//RedisSetting redis配置
+	// RedisSetting redis配置
 	RedisSetting = &Redis{}
 )
 
@@ -66,7 +66,7 @@ type Redis struct {
 	IPHost string
 }
 
-//Setup 设置配置
+// Setup 设置配置
 func Setup(confPath string) {
 	if _, err := toml.DecodeFile(confPath, &cfg); err != nil {
 		log.Fatal(err)

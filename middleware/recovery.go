@@ -12,14 +12,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//RecoveryMiddleware 捕获所有panic，并且返回错误信息
+// RecoveryMiddleware 捕获所有panic，并且返回错误信息
 func RecoveryMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
 				httpRequest, _ := httputil.DumpRequest(c.Request, false)
 				logger.Errorw("RecoveryMiddleware", "time", time.Now(), "error", err, "request", string(httpRequest), "stack", string(debug.Stack()))
-				//接口返回
+				// 接口返回
 				if setting.AppSetting.DebugMode != "debug" {
 					ResponseError(c, 1004, errors.New("内部错误"))
 				} else {
