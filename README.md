@@ -137,7 +137,8 @@ c.String(http.StatusOK, "Welcome Gin Server5")
 v1 := router.Group("/v1")
 
 v1.Use(
-//middleware.RecoveryMiddleware(),
+    middleware.RecoveryMiddleware(),
+    middleware.RequestLog(),
 )
 {
     controller.ReportRegister(v1)
@@ -146,9 +147,11 @@ v1.Use(
 中 controller.ReportRegister(v1)调用controller/ReportController
 
 ```go
+// ReportRegister 路由注册
 func ReportRegister(router *gin.RouterGroup) {
-    controller := new(ReportController)
-    router.POST("/report/index", controller.index)
+	controller := new(ReportController)
+	router.POST("/report/index", controller.index)
+	router.GET("/report/test", controller.test)
 }
 ```
 方法注册路由

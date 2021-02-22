@@ -30,7 +30,6 @@ func ReportRegister(router *gin.RouterGroup) {
 	controller := new(ReportController)
 	router.POST("/report/index", controller.index)
 	router.GET("/report/test", controller.test)
-
 }
 
 // 测试
