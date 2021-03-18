@@ -56,6 +56,7 @@ type Mysql struct {
 	IPHost          string
 	Port            string
 	DbName          string
+	TablePrefix     string
 	MaxIdleConns    int
 	MaxOpenConns    int
 	ConnMaxLifetime time.Duration

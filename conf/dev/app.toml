@@ -18,6 +18,7 @@
     IPHost = ""
     Port = "3306"
     DbName = ""
+    TablePrefix = ""
     MaxIdleConns = 25 #设置空闲链接
     MaxOpenConns = 25  # 最大连接数 0为不限制
     ConnMaxLifetime = 60 #可重用链接得最大时间长度，单位分钟
