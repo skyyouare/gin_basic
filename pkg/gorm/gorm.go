@@ -4,11 +4,10 @@ import (
 	"fmt"
 	"gin_basic/pkg/logger"
 	"gin_basic/pkg/setting"
+	"time"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-
-	"time"
 )
 
 var Conn *gorm.DB
