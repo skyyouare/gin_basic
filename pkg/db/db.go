@@ -27,3 +27,8 @@ func Setup() {
 	database.SetConnMaxLifetime(setting.MysqlSetting.ConnMaxLifetime * time.Minute) // 可重用链接得最大时间长度
 	Conn = database
 }
+
+//关闭数据库
+func Close() error {
+	return Conn.Close()
+}
