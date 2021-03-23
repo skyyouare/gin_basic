@@ -14,11 +14,11 @@
 
 
 [Mysql]
-    UserName = ""
-    PassWord = ""
-    IPHost = ""
+    UserName = "root"
+    PassWord = "admin888"
+    IPHost = "127.0.0.1"
     Port = "3306"
-    DbName = ""
+    DbName = "go_test"
     TablePrefix = ""
     MaxIdleConns = 25 #设置空闲链接
     MaxOpenConns = 25  # 最大连接数 0为不限制
