@@ -1,0 +1,54 @@
+settings:
+  files:
+    outputs:
+      status: false
+      path: ""
+      name: .r.outputs.log
+    logs:
+      status: false
+      path: ""
+      name: .r.logs.log
+    errors:
+      status: false
+      path: ""
+      name: .r.errors.log
+  flimit: 2000
+  legacy:
+      force: false             // force polling watcher instead fsnotifiy
+      interval: 100ms         // polling interval
+server:
+    status: true               // server status
+    open: false                 // open browser at start
+    host: localhost             // server host
+    port: 9090                  // server port
+schema:
+- name: gin_basic
+  path: .
+  commands:
+    #clean:
+      #status: true
+    #vet:
+      #status: true
+    #fmt:
+      #status: true
+    #test:
+      #status: true
+    #generate:
+      #status: true
+    install:
+      status: true
+    #build:
+      #status: true
+    run:
+      status: true
+  args:
+  - dev
+  watcher:
+    extensions:
+    - go
+    paths:
+    - /
+    ignore:
+      paths:
+      - .git
+      - vendor

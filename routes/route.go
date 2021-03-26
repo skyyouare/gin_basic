@@ -13,7 +13,7 @@ import (
 // so this one won't be so messy
 func GetRoutes(router *gin.Engine) {
 	router.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Welcome Gin Server14")
+		c.String(http.StatusOK, "Welcome Gin Server")
 	})
 	v1 := router.Group("/v1")
 
