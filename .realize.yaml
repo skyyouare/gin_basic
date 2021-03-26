@@ -52,3 +52,18 @@ schema:
       paths:
       - .git
       - vendor
+    scripts:
+    - type: before
+      command: echo before global
+      global: true
+      output: true
+    - type: before
+      command: echo before change
+      output: true
+    - type: after
+      command: echo after change
+      output: true
+    - type: after
+      command: echo after global
+      global: true
+      output: true
