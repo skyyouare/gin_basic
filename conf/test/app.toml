@@ -1,6 +1,6 @@
 #conf
 [App]
-    DebugMode="test"
+    DebugMode="debug"
     TimeLocation="Asia/Chongqing"
 
 [Server]
