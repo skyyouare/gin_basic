@@ -15,6 +15,8 @@ const (
 	SuccessCode ResponseCode = 1000
 	// ErrorCode 失败状态码
 	ErrorCode ResponseCode = 1001
+	// 找不到页面
+	NotFoundCode ResponseCode = 1004
 )
 
 type successResponse struct {

@@ -18,7 +18,13 @@ func RecoveryMiddleware() gin.HandlerFunc {
 		defer func() {
 			if err := recover(); err != nil {
 				httpRequest, _ := httputil.DumpRequest(c.Request, false)
-				logger.Errorw("RecoveryMiddleware", "time", time.Now(), "error", err, "request", string(httpRequest), "stack", string(debug.Stack()))
+				logger.Errorw(
+					"recovery-middleware",
+					"time", time.Now(),
+					"error", err,
+					"request", string(httpRequest),
+					"stack", string(debug.Stack()),
+				)
 				// 接口返回
 				if setting.AppSetting.DebugMode != "debug" {
 					ResponseError(c, 1004, errors.New("内部错误"))

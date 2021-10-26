@@ -43,7 +43,27 @@ func Ginzap(timeFormat string, utc bool) gin.HandlerFunc {
 				logger.Error(e)
 			}
 		} else {
-			logger.Infow("gin-info", "status", c.Writer.Status(), "method", c.Request.Method, "path", path, "query", query, "ip", c.ClientIP(), "user-agent", c.Request.UserAgent(), "time", end.Format(timeFormat), "latency", latency)
+			// logger.Info(
+			// 	zap.Int("status", c.Writer.Status()),
+			// 	zap.String("method", c.Request.Method),
+			// 	zap.String("path", path),
+			// 	zap.String("query", query),
+			// 	zap.String("ip", c.ClientIP()),
+			// 	zap.String("user-agent", c.Request.UserAgent()),
+			// 	zap.String("time", end.Format(timeFormat)),
+			// 	zap.Duration("latency", latency),
+			// )
+			logger.Infow(
+				"gin-info",
+				"status", c.Writer.Status(),
+				"method", c.Request.Method,
+				"path", path,
+				"query", query,
+				"ip", c.ClientIP(),
+				"user-agent", c.Request.UserAgent(),
+				// "time", end.Format(timeFormat),
+				"latency", latency,
+			)
 		}
 	}
 }
@@ -70,7 +90,16 @@ func RecoveryWithZap(stack bool) gin.HandlerFunc {
 
 				httpRequest, _ := httputil.DumpRequest(c.Request, false)
 				if brokenPipe {
-					logger.Errorw("gin-err", "path", c.Request.URL.Path, "error", err, "request", string(httpRequest))
+					// logger.Error("gin-broken-pipe",
+					// 	zap.String("path", c.Request.URL.Path),
+					// 	zap.Any("error", err),
+					// 	zap.String("request", string(httpRequest)),
+					// )
+					logger.Errorw("gin-broken-pipe",
+						"path", c.Request.URL.Path,
+						"error", err,
+						"request", string(httpRequest),
+					)
 					// If the connection is dead, we can't write a status to it.
 					c.Error(err.(error)) // nolint: errcheck
 					c.Abort()
@@ -78,9 +107,29 @@ func RecoveryWithZap(stack bool) gin.HandlerFunc {
 				}
 
 				if stack {
-					logger.Errorw("gin-recovery-from-panic", "time", time.Now(), "error", err, "request", string(httpRequest), "stack", string(debug.Stack()))
+					// logger.Error("gin-recover-from-panic",
+					// 	zap.Time("time", time.Now()),
+					// 	zap.Any("error", err),
+					// 	zap.String("request", string(httpRequest)),
+					// 	zap.String("stack", string(debug.Stack())),
+					// )
+					logger.Errorw("gin-recover-from-panic",
+						// "time", time.Now(),
+						"error", err,
+						"request", string(httpRequest),
+						"stack", string(debug.Stack()),
+					)
 				} else {
-					logger.Errorw("gin-recovery-from-panic", "time", time.Now(), "error", err, "request", string(httpRequest))
+					// logger.Error("gin-recover-from-panic",
+					// 	zap.Time("time", time.Now()),
+					// 	zap.Any("error", err),
+					// 	zap.String("request", string(httpRequest)),
+					// )
+					logger.Error("gin-recover-from-panic",
+						// "time", time.Now(),
+						"error", err,
+						"request", string(httpRequest),
+					)
 				}
 				c.AbortWithStatus(http.StatusInternalServerError)
 			}
