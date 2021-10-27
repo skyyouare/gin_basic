@@ -58,6 +58,8 @@ func RequestLog() gin.HandlerFunc {
 			// RequestInLog(c)
 			// defer RequestOutLog(c)
 			start := time.Now()
+			bodyBytes, _ := ioutil.ReadAll(c.Request.Body)
+			c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes)) // Write body back
 			c.Next()
 			response, _ := c.Get("response")
 			end := time.Now()
@@ -66,6 +68,7 @@ func RequestLog() gin.HandlerFunc {
 				"uri", c.Request.RequestURI,
 				"method", c.Request.Method,
 				"args", c.Request.PostForm,
+				"body", string(bodyBytes),
 				"ip", c.ClientIP(),
 				"response", response,
 				"proc_time", proc_time,
