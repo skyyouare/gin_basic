@@ -40,13 +40,14 @@ func Setup() {
 	})
 	encoder := zap.NewProductionEncoderConfig()
 	encoder.TimeKey = "time"
-	encoder.FunctionKey = "xxxx"
+	encoder.FunctionKey = "func"
+	encoder.StacktraceKey = "trace"
 	encoder.EncodeTime = func(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 		var cstSh, _ = time.LoadLocation("Asia/Shanghai") //上海
 		enc.AppendString(t.In(cstSh).Format("2006-01-02 15:04:05"))
 	}
 	core := zapcore.NewCore(zapcore.NewJSONEncoder(encoder), syncWriter, zap.NewAtomicLevelAt(level))
-	logger := zap.New(core, zap.AddCaller(), zap.AddCallerSkip(1))
+	logger := zap.New(core, zap.AddCaller(), zap.AddCallerSkip(1), zap.AddStacktrace(zap.ErrorLevel))
 	errorLogger = logger.Sugar()
 }
 
