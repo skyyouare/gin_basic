@@ -19,6 +19,7 @@ func InitRouter() *gin.Engine {
 	r.NoMethod(middleware.HandleNotFound)
 	r.Use(middleware.RequestLog())
 	r.Use(middleware.RecoveryMiddleware())
+	r.StaticFile("/favicon.ico", "./favicon.ico")
 	routes.GetRoutes(r)
 	return r
 }

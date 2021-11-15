@@ -26,5 +26,6 @@ func GetRoutes(router *gin.Engine) {
 	)
 	{
 		controller.ReportRegister(v1)
+		controller.TestRegister(v1)
 	}
 }

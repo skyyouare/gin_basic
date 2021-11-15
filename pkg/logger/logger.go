@@ -39,6 +39,8 @@ func Setup() {
 		Compress:  setting.LogSetting.Compress,
 	})
 	encoder := zap.NewProductionEncoderConfig()
+	encoder.TimeKey = "time"
+	encoder.FunctionKey = "xxxx"
 	encoder.EncodeTime = func(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 		var cstSh, _ = time.LoadLocation("Asia/Shanghai") //上海
 		enc.AppendString(t.In(cstSh).Format("2006-01-02 15:04:05"))

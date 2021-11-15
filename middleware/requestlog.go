@@ -41,7 +41,7 @@ func RequestOutLog(c *gin.Context) {
 		"args", c.Request.PostForm,
 		"ip", c.ClientIP(),
 		"response", response,
-		"proc_time", endExecTime.Sub(startExecTime).Seconds(),
+		"exec_time", endExecTime.Sub(startExecTime).Seconds(),
 	)
 }
 
@@ -63,7 +63,7 @@ func RequestLog() gin.HandlerFunc {
 			c.Next()
 			response, _ := c.Get("response")
 			end := time.Now()
-			proc_time := end.Sub(start)
+			exec_time := end.Sub(start)
 			logger.Infow("gin-request",
 				"uri", c.Request.RequestURI,
 				"method", c.Request.Method,
@@ -71,7 +71,7 @@ func RequestLog() gin.HandlerFunc {
 				"body", string(bodyBytes),
 				"ip", c.ClientIP(),
 				"response", response,
-				"proc_time", proc_time,
+				"exec_time", exec_time,
 			)
 		}
 		c.Next()
