@@ -1,14 +1,14 @@
 version: '2'
 services:
-  #server container
+  # server container
   gin_basic:
     build:
       context: .
       dockerfile: Dockerfile.prod
-    #use docker images
+    # use docker images
     image: skyyoure/gin_basic_prod:latest
     container_name: gin_basic
-    #ports setting
+    # ports setting
     ports:
       - 9090:9090
     restart: always

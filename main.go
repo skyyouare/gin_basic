@@ -26,7 +26,7 @@ func init() {
 }
 
 func main() {
-	//关闭db，redis连接等
+	// 关闭db，redis连接等
 	defer func() {
 		logger.Infof("数据库连接关闭")
 		// db.Close()

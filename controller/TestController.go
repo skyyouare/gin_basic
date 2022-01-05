@@ -9,8 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var db = gorm.Conn
-
 // TestController 控制器
 type TestController struct {
 }
@@ -34,7 +32,7 @@ func (t *TestController) test(c *gin.Context) {
 	// middleware.ResponseError(c, middleware.ErrorCode, errors.New("测试"))
 	// blog_auth
 	var auth Auth
-	db.First(&auth)
+	gorm.Conn.First(&auth)
 	fmt.Println(auth, auth.ID, auth.Username, auth.Password)
 	middleware.ResponseSuccess(c, "test")
 }

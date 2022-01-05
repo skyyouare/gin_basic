@@ -54,7 +54,7 @@ func RequestLog() gin.HandlerFunc {
 				logger.Errorf(e)
 			}
 		} else {
-			//弃用，合成一条日志
+			// 弃用，合成一条日志
 			// RequestInLog(c)
 			// defer RequestOutLog(c)
 			start := time.Now()

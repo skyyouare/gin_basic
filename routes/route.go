@@ -20,7 +20,7 @@ func GetRoutes(router *gin.Engine) {
 	v1 := router.Group("/v1")
 
 	v1.Use(
-	//弃用 在InitRouter中使用中间件
+	// 弃用 在InitRouter中使用中间件
 	// middleware.RecoveryMiddleware(),
 	// middleware.RequestLog(),
 	)

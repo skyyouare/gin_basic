@@ -29,7 +29,7 @@ func getLoggerLevel(lvl string) zapcore.Level {
 	return zapcore.InfoLevel
 }
 
-//Setup 初始化
+// Setup 初始化
 func Setup() {
 	level := getLoggerLevel("debug")
 	syncWriter := zapcore.AddSync(&lumberjack.Logger{

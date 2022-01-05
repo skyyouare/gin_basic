@@ -15,7 +15,6 @@ var Conn *sqlx.DB
 // Setup 数据库设置
 func Setup() {
 	// dsn "用户名:密码@[连接方式](主机名:端口号)/数据库名"
-	// var dsn = "test:ceshi@(192.168.8.33)/socialtouch_dashboard_v4_20201127_140809"
 	dataSourceName := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v", setting.MysqlSetting.UserName, setting.MysqlSetting.PassWord, setting.MysqlSetting.IPHost, setting.MysqlSetting.Port, setting.MysqlSetting.DbName)
 	dataSourceName = dataSourceName + "?parseTime=true&loc=Asia%2FShanghai&charset=utf8"
 	database, err := sqlx.Connect("mysql", dataSourceName)
@@ -28,7 +27,7 @@ func Setup() {
 	Conn = database
 }
 
-//关闭数据库
+// 关闭数据库
 func Close() error {
 	return Conn.Close()
 }

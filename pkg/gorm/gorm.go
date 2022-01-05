@@ -41,9 +41,9 @@ func Setup() {
 	if err != nil {
 		logger.Fatal("gorm.Setup err: %v", err)
 	}
-	//TODO
-	//https://github.com/jinzhu/gorm/blob/master/logger.go
-	//http://www.manongjc.com/detail/17-gjclhsxhxgsgelp.html 日志
+	// TODO
+	// https://github.com/jinzhu/gorm/blob/master/logger.go
+	// http://www.manongjc.com/detail/17-gjclhsxhxgsgelp.html 日志
 	gorm.DefaultTableNameHandler = func(database *gorm.DB, defaultTableName string) string {
 		return setting.MysqlSetting.TablePrefix + defaultTableName
 	}
@@ -52,7 +52,7 @@ func Setup() {
 	database.LogMode(true)
 	database.SetLogger(&GormLogger{})
 
-	database.SingularTable(true)                                                         //gorm会在创建表的时候去掉”s“的后缀
+	database.SingularTable(true)                                                         // gorm会在创建表的时候去掉”s“的后缀
 	database.DB().SetMaxIdleConns(setting.MysqlSetting.MaxIdleConns)                     // 设置空闲链接
 	database.DB().SetMaxOpenConns(setting.MysqlSetting.MaxOpenConns)                     // 最大连接数 0为不限制
 	database.DB().SetConnMaxLifetime(setting.MysqlSetting.ConnMaxLifetime * time.Minute) // 可重用链接得最大时间长度

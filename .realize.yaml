@@ -25,20 +25,20 @@ schema:
 - name: gin_basic
   path: .
   commands:
-    #clean:
-      #status: true
-    #vet:
-      #status: true
-    #fmt:
-      #status: true
-    #test:
-      #status: true
-    #generate:
-      #status: true
+    # clean:
+      # status: true
+    # vet:
+      # status: true
+    # fmt:
+      # status: true
+    # test:
+      # status: true
+    # generate:
+      # status: true
     install:
       status: true
-    #build:
-      #status: true
+    # build:
+      # status: true
     run:
       status: true
   args:

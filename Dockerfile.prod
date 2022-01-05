@@ -26,12 +26,12 @@ WORKDIR /dist
 # 将二进制文件从 /home/www/gin_basic 目录复制到这里
 RUN cp /home/www/gin_basic/app .
 # 在容器目录 /dist 创建一个目录 为src
-#RUN mkdir conf .
-#配置文件移动
+# RUN mkdir conf .
+# 配置文件移动
 RUN cp -r /home/www/gin_basic/conf ./conf/
 # 在容器目录 把宿主机的静态资源文件 拷贝到 容器/dist/src目录下
 # 这个步骤可以略  因为项目是引用到了 外部静态资源
-#RUN cp -r /home/www/gin_basic/src/static ./src/
+# RUN cp -r /home/www/gin_basic/src/static ./src/
 # 声明服务端口
 EXPOSE 9090
 

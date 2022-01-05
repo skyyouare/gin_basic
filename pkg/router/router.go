@@ -12,7 +12,7 @@ func InitRouter() *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Logger())
 	// r.Use(gin.Recovery())
-	//ginzap弃用，使用middleware.RequestLog() middleware.RecoveryMiddleware()代替
+	// ginzap弃用，使用middleware.RequestLog() middleware.RecoveryMiddleware()代替
 	// r.Use(ginzap.Ginzap(time.RFC3339, true))
 	// r.Use(ginzap.RecoveryWithZap(true))
 	r.NoRoute(middleware.HandleNotFound)

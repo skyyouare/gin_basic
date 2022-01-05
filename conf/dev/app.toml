@@ -1,4 +1,4 @@
-#conf
+# conf
 [App]
     DebugMode="debug"
     TimeLocation="Asia/Chongqing"
@@ -19,9 +19,12 @@
     Port = "3306"
     DbName = "blog"
     TablePrefix = "blog_"
-    MaxIdleConns = 25 #设置空闲链接
-    MaxOpenConns = 25  # 最大连接数 0为不限制
-    ConnMaxLifetime = 60 #可重用链接得最大时间长度，单位分钟
+    # 设置空闲链接
+    MaxIdleConns = 25 
+    # 最大连接数 0为不限制
+    MaxOpenConns = 25  
+    # 可重用链接得最大时间长度，单位分钟
+    ConnMaxLifetime = 60 
 
 [Redis]
     IPHost = "127.0.0.1:6379"
