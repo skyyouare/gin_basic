@@ -2,7 +2,6 @@ package main
 
 import (
 	"gin_basic/pkg/app"
-	"gin_basic/pkg/gorm"
 	"gin_basic/pkg/logger"
 	"gin_basic/pkg/server"
 	"gin_basic/pkg/setting"
@@ -22,16 +21,16 @@ func init() {
 	// 初始化db
 	// db.Setup()
 	// 初始化gorm
-	gorm.Setup()
+	// gorm.Setup()
 }
 
 func main() {
 	// 关闭db，redis连接等
-	defer func() {
-		logger.Infof("数据库连接关闭")
-		// db.Close()
-		gorm.Close()
-	}()
+	// defer func() {
+	// 	logger.Infof("数据库连接关闭")
+	// 	// db.Close()
+	// 	gorm.Close()
+	// }()
 	// 启动http服务
 	server.HTTPServRun()
 	// 优雅关闭服务
