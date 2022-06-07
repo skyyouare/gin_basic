@@ -70,12 +70,12 @@ echo 'end'
 
 ##2.1、打标签:
 ```shell
-docker tag golang:1.14.1 docker-hub.shiqutech.com/oa/golang:1.14.1
+docker tag golang:1.16.2 docker-hub.shiqutech.com/oa/golang:1.16.2
 ```
 
 ##2.2、推到仓库:
 ```shell
-docker push docker-hub.shiqutech.com/oa/golang:1.14.1
+docker push docker-hub.shiqutech.com/oa/golang:1.16.2
 ```
 
 ##2.3、仓库查看地址:

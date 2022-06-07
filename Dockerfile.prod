@@ -1,6 +1,6 @@
 #参考文档  https://blog.csdn.net/weixin_44042863/article/details/105872006
-#FROM golang:1.14.1
-FROM  docker-hub.shiqutech.com/oa/golang:1.14.1
+#FROM golang:1.16.2
+FROM  docker-hub.shiqutech.com/oa/golang:1.16.2
 
 # 为我们的镜像设置必要的环境变量
 ENV GO111MODULE=on \
