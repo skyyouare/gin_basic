@@ -52,6 +52,7 @@ schema:
       paths:
       - .git
       - vendor
+      - .vscode
     scripts:
     - type: before
       command: echo before global
