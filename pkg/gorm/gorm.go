@@ -1,5 +1,6 @@
-package gorm2
+package gorm
 
+//gorm v2
 import (
 	"fmt"
 	"gin_basic/pkg/logger"

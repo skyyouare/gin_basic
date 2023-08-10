@@ -1,5 +1,6 @@
 package gorm1
 
+//gorm v1弃用
 import (
 	"fmt"
 	"gin_basic/pkg/logger"

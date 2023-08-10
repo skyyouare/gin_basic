@@ -3,7 +3,7 @@ package controller
 import (
 	"fmt"
 	"gin_basic/middleware"
-	"gin_basic/pkg/gorm2"
+	"gin_basic/pkg/gorm"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -32,7 +32,7 @@ func (t *TestController) test(c *gin.Context) {
 	// middleware.ResponseError(c, middleware.ErrorCode, errors.New("测试"))
 	// blog_auth
 	var auth Auth
-	gorm2.Conn.First(&auth)
+	gorm.Conn.First(&auth)
 	fmt.Println(auth, auth.ID, auth.Username, auth.Password)
 	middleware.ResponseSuccess(c, "test")
 }
