@@ -18,18 +18,13 @@ type Writer struct {
 }
 
 func (w Writer) Printf(format string, v ...interface{}) {
-	fmt.Print(w)
-	fmt.Print(v)
-	switch v[0] {
-	case "sql":
-		logger.Infow("gin_gorm",
-			"sql", v[3],
-			"src", v[1],
-			"duration", v[2],
-			"values", v[4],
-			"rows_returned", v[5],
-		)
-	}
+	logger.Infow("gin_gorm",
+		"sql", v[3],
+		"src", v[0],
+		"duration", v[1],
+		"values", "",
+		"rows_returned", v[2],
+	)
 }
 
 // Setup initializes the database instance
@@ -40,6 +35,7 @@ func Setup() {
 		setting.MysqlSetting.IPHost,
 		setting.MysqlSetting.Port,
 		setting.MysqlSetting.DbName)
+
 	GormLogger := glogger.New(Writer{}, glogger.Config{
 		SlowThreshold:             200 * time.Millisecond, // 慢 SQL 阈值
 		LogLevel:                  glogger.Info,           // 日志级别
@@ -68,8 +64,6 @@ func Setup() {
 	}
 
 	database.Debug()
-	// database.LogMode(true)
-	// database.SetLogger(&GormLogger{})
 
 	sqlDB, _ := database.DB()
 	sqlDB.SetMaxIdleConns(setting.MysqlSetting.MaxIdleConns)                     //设置空闲链接

@@ -2,7 +2,7 @@ package main
 
 import (
 	"gin_basic/pkg/app"
-	gorm2 "gin_basic/pkg/gorm2"
+	"gin_basic/pkg/gorm2"
 	"gin_basic/pkg/logger"
 	"gin_basic/pkg/server"
 	"gin_basic/pkg/setting"
