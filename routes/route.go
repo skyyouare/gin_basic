@@ -12,7 +12,7 @@ import (
 // so this one won't be so messy
 func GetRoutes(router *gin.Engine) {
 	router.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Welcome Gin Server1234")
+		c.String(http.StatusOK, "Welcome Gin Server12345")
 	})
 	router.GET("/panic", func(c *gin.Context) {
 		panic("An unexpected error happen!")
