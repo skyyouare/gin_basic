@@ -28,3 +28,6 @@
 
 [Redis]
     IPHost = "127.0.0.1:6379"
+    PassWord = ""
+    Db = 0
+    Protocol = 3

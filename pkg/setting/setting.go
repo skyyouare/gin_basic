@@ -64,7 +64,10 @@ type Mysql struct {
 
 // Redis redis相关配置
 type Redis struct {
-	IPHost string
+	IPHost   string
+	PassWord string
+	Db       int
+	Protocol int
 }
 
 // Setup 设置配置
@@ -77,5 +80,4 @@ func Setup(confPath string) {
 	LogSetting = cfg.Log
 	MysqlSetting = cfg.Mysql
 	RedisSetting = cfg.Redis
-	return
 }

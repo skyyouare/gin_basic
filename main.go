@@ -4,6 +4,7 @@ import (
 	"gin_basic/pkg/app"
 	"gin_basic/pkg/gorm"
 	"gin_basic/pkg/logger"
+	"gin_basic/pkg/rdb"
 	"gin_basic/pkg/server"
 	"gin_basic/pkg/setting"
 	"os"
@@ -23,6 +24,7 @@ func init() {
 	// db.Setup()
 	// 初始化gorm
 	gorm.Setup()
+	rdb.Setup()
 }
 
 func main() {
@@ -31,6 +33,7 @@ func main() {
 		logger.Infof("数据库连接关闭")
 		// db.Close()
 		gorm.Close()
+		rdb.Close()
 	}()
 	// 启动http服务
 	server.HTTPServRun()

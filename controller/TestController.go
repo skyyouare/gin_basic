@@ -5,6 +5,8 @@ import (
 	"gin_basic/middleware"
 	"gin_basic/model"
 	"gin_basic/pkg/gorm"
+	"gin_basic/pkg/logger"
+	"gin_basic/pkg/rdb"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,5 +27,17 @@ func (t *TestController) test(c *gin.Context) {
 	var authlist []model.Auth
 	gorm.Conn.Find(&authlist)
 	fmt.Println(authlist)
-	middleware.ResponseSuccess(c, "test")
+
+	err := rdb.Conn.Set(c, "nihao123213", "ajjjjjjjj", 0).Err()
+	if err != nil {
+		logger.Error(err)
+	}
+
+	val, err := rdb.Conn.Get(c, "nihao123213").Result()
+	if err != nil {
+		logger.Error(err)
+	}
+	fmt.Println("nihao123213", val)
+
+	middleware.ResponseSuccess(c, authlist)
 }
