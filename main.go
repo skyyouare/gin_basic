@@ -24,6 +24,7 @@ func init() {
 	// db.Setup()
 	// 初始化gorm
 	gorm.Setup()
+	// 初始化redis
 	rdb.Setup()
 }
 
