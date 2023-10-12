@@ -7,6 +7,7 @@ import (
 	"gin_basic/pkg/gorm"
 	"gin_basic/pkg/logger"
 	"gin_basic/pkg/rdb"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,6 +20,7 @@ type TestController struct {
 func TestRegister(router *gin.RouterGroup) {
 	controller := new(TestController)
 	router.GET("/test/test", controller.test)
+	router.GET("/test/test1", controller.test1)
 }
 
 // 测试
@@ -40,4 +42,12 @@ func (t *TestController) test(c *gin.Context) {
 	fmt.Println("nihao123213", val)
 
 	middleware.ResponseSuccess(c, authlist)
+}
+
+// 测试
+func (t *TestController) test1(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"title": "Gin Framework",
+		"items": []string{"a", "b", "c"},
+	})
 }

@@ -11,6 +11,7 @@ import (
 // this way every group of routes can be defined in their own file
 // so this one won't be so messy
 func GetRoutes(router *gin.Engine) {
+	router.LoadHTMLGlob("templates/*")
 	router.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "Welcome Gin Server12345")
 	})
